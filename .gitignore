@@ -26,3 +26,4 @@ hs_err_pid*
 /Spring-Boot-Cache/.mvn/
 !/Spring-Boot-Freemarke/.mvn/
 /Spring-Boot-Freemarke/.mvn/
+/.idea/
