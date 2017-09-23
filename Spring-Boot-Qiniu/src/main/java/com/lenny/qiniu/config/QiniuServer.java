@@ -10,11 +10,17 @@ import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by zly on 17-9-16.
  */
+@Component
 public class QiniuServer {
+
+    @Value("${qiniu.bucket}")
+    private String testValue;
 
     private String bucket="learnly";
 
@@ -23,6 +29,7 @@ public class QiniuServer {
     private String secretKey = "h7Aoy_QzK6_6ck9MjfAx8MBuj8Rd9AJ2U-jTfc_m";
 
     private long expireSeconds = 1 * 60 * 60 * 1000;
+
     private final String QINIU_CDN = "http://owd5a52qv.bkt.clouddn.com/";
     private  String token = null;
     private Auth auth = null;
@@ -37,13 +44,15 @@ public class QiniuServer {
         return qiniuServer;
     }
 
-    private QiniuServer(){
+    public QiniuServer(){
         System.out.println("qiniu server init ... ");
+      /*  System.out.println("testvalue is " + testValue);
         System.out.println("bucket is " + bucket);
         System.out.println("accessKey is " + accessKey);
         System.out.println("secretKey is " + secretKey);
         auth = Auth.create(accessKey, secretKey);
         updateToken();
+        new Thread(new TokenUpdater(), "Qiniu-token-updater").start();*/
     }
 
     private synchronized String updateToken(){
@@ -77,6 +86,23 @@ public class QiniuServer {
             System.out.println(e);
         }
         return "";
+    }
+
+
+    class TokenUpdater implements  Runnable{
+        private Integer cnt =0;
+        public void run(){
+            while (true){
+                Long sleepTime = 3 * 1000L;
+                try{
+                    Thread.sleep(sleepTime);
+                    System.out.println("十秒定是任务, 次数： "+ cnt++);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }
     }
 
 

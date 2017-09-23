@@ -18,7 +18,6 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>com.qiniu</groupId>
@@ -44,6 +43,13 @@
 			<version>0.1.4</version>
 			<scope>compile</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.lenny</groupId>
+			<artifactId>Spring-Boot-Cache</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 
 
 	</dependencies>
